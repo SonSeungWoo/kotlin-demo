@@ -19,7 +19,27 @@
         <kotlin.version>1.2.71</kotlin.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>jcenter</id>
+            <name>jcenter</name>
+            <url>https://jcenter.bintray.com</url>
+        </repository>
+    </repositories>
+
+
     <dependencies>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-html-jvm</artifactId>
+            <version>0.6.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-html-js</artifactId>
+            <version>0.6.10</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -59,6 +79,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+
+
     </dependencies>
 
     <build>
@@ -94,7 +116,41 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <dependentWarExcludes>META-INF/*,META-INF/**/*,*meta.js,**/*class</dependentWarExcludes>
+                    <webXml>src/main/resources/web.xml</webXml>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/webapp</directory>
+                        </resource>
+                    </webResources>
+                    <overlays>
+                        <overlay>
+                            <groupId>org.jetbrains.kotlin</groupId>
+                            <artifactId>kotlin-js-library</artifactId>
+                            <type>jar</type>
+                            <includes>
+                                <include>kotlin.js</include>
+                            </includes>
+                            <targetPath>js/</targetPath>
+                        </overlay>
+                        <overlay>
+                            <groupId>org.jetbrains.kotlinx</groupId>
+                            <artifactId>kotlinx-html-assembly</artifactId>
+                            <classifier>webjar</classifier>
+                            <type>jar</type>
+                            <targetPath>js/</targetPath>
+                        </overlay>
+                    </overlays>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+
 
 </project>

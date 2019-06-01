@@ -17,6 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
         <kotlin.version>1.2.71</kotlin.version>
+        <kotlinx.html.version>0.6.10</kotlinx.html.version>
     </properties>
 
     <repositories>
@@ -32,12 +33,12 @@
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
             <artifactId>kotlinx-html-jvm</artifactId>
-            <version>0.6.10</version>
+            <version>${kotlinx.html.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
             <artifactId>kotlinx-html-js</artifactId>
-            <version>0.6.10</version>
+            <version>${kotlinx.html.version}</version>
         </dependency>
 
         <dependency>
